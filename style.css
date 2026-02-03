@@ -1,0 +1,58 @@
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+    min-height: 100vh;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.magic-card {
+    border-radius: 2.5rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.magic-card:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.disney-button {
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    transition: all 0.2s;
+}
+
+.disney-button:active {
+    transform: scale(0.95);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #60a5fa;
+    border-radius: 10px;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+html, body {
+    overflow-x: hidden;
+    position: relative;
+}

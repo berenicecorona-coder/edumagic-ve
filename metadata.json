@@ -1,0 +1,7 @@
+{
+  "name": "EduMagic VE - Organizador Escolar",
+  "description": "Una herramienta inteligente para padres en Venezuela que permite organizar el calendario escolar extrayendo tareas y evaluaciones de fotos o texto usando IA.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
