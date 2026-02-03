@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Lapso, Task, ExtractedTask } from './types';
 import { getStoredTasks, saveTasks, updateTask, deleteTask } from './services/storageService';
-import { TaskInput } from './components/TaskInput';
-import { TaskList } from './components/TaskList';
-import { TaskModal } from './components/TaskModal';
-import { Stars, Sparkles, Wand2 } from 'lucide-react';
+import { Tablero } from './componentes/Tablero';
+import { EntradaDeTarea } from './componentes/EntradaDeTarea';
+import { ListaDeTareas } from './componentes/ListaDeTareas';
+import { TareaModal } from './componentes/TareaModal';
+import { LayoutGrid, ClipboardList, Stars, Sparkles, Wand2 } from 'lucide-react';
 
-const App: React.FC = () => {
+const Aplicacion: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [activeLapso, setActiveLapso] = useState<Lapso>(Lapso.PRIMERO);
   const [extractedTasks, setExtractedTasks] = useState<ExtractedTask[] | null>(null);
+  const [view, setView] = useState<'tablero' | 'lista'>('tablero');
 
   useEffect(() => {
     setTasks(getStoredTasks());
@@ -24,6 +26,7 @@ const App: React.FC = () => {
     setTasks(updatedTasks);
     saveTasks(updatedTasks);
     setExtractedTasks(null);
+    setView('lista');
   };
 
   const handleUpdateTask = (updated: Task) => {
@@ -79,20 +82,40 @@ const App: React.FC = () => {
 
       {/* Main Content Area */}
       <main className="max-w-4xl mx-auto px-4 mt-10">
-        <TaskInput onTasksExtracted={handleTasksExtracted} currentLapso={activeLapso} />
+        <EntradaDeTarea onTasksExtracted={handleTasksExtracted} currentLapso={activeLapso} />
 
-        <div className="mt-12 animate-in fade-in slide-in-from-bottom-10 duration-700">
-          <TaskList 
-            tasks={tasks} 
-            activeLapso={activeLapso} 
-            onUpdate={handleUpdateTask} 
-            onDelete={handleDeleteTask} 
-          />
+        {/* View Switcher Juguetón */}
+        <div className="flex items-center justify-center gap-3 mb-10 mt-12 bg-white/50 backdrop-blur p-2 rounded-full w-fit mx-auto border-2 border-blue-50 shadow-sm">
+          <button 
+            onClick={() => setView('tablero')}
+            className={`flex items-center gap-2 px-8 py-3 font-black text-sm rounded-full transition-all ${view === 'tablero' ? 'bg-blue-600 shadow-xl text-white' : 'text-blue-400 hover:bg-blue-50'}`}
+          >
+            <LayoutGrid size={18} /> TABLERO
+          </button>
+          <button 
+            onClick={() => setView('lista')}
+            className={`flex items-center gap-2 px-8 py-3 font-black text-sm rounded-full transition-all ${view === 'lista' ? 'bg-blue-600 shadow-xl text-white' : 'text-blue-400 hover:bg-blue-50'}`}
+          >
+            <ClipboardList size={18} /> LISTA
+          </button>
+        </div>
+
+        <div className="animate-in fade-in slide-in-from-bottom-10 duration-700">
+          {view === 'tablero' ? (
+            <Tablero tasks={tasks} activeLapso={activeLapso} />
+          ) : (
+            <ListaDeTareas 
+              tasks={tasks} 
+              activeLapso={activeLapso} 
+              onUpdate={handleUpdateTask} 
+              onDelete={handleDeleteTask} 
+            />
+          )}
         </div>
       </main>
 
       {extractedTasks && (
-        <TaskModal 
+        <TareaModal 
           extracted={extractedTasks} 
           onConfirm={handleConfirmTasks} 
           onCancel={() => setExtractedTasks(null)}
@@ -110,4 +133,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Aplicacion;
