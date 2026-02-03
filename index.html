@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-title" content="EduMagic VE">
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3475/3475220.png">
 
-    <!-- CSS Consolidado para asegurar carga inmediata y evitar 404 -->
+    <!-- CSS Consolidado -->
     <style>
         body {
             font-family: 'Fredoka', sans-serif;
@@ -79,7 +79,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Importmap corregido solo con dependencias necesarias en producción -->
     <script type="importmap">
 {
   "imports": {
@@ -99,11 +98,7 @@
 </head>
 <body>
     <div id="root"></div>
-    
-    <!-- Script principal con ruta relativa -->
     <script type="module" src="./index.tsx"></script>
-    
-    <!-- Registro del Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

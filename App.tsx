@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Lapso, Task, ExtractedTask } from './types';
 import { getStoredTasks, saveTasks, updateTask, deleteTask } from './services/storageService';
